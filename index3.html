@@ -14,44 +14,23 @@
 
 <body>
     <div>
-        <h1>Ethereum Secret Messenger</h1>
-        <hr>
-
-        <label for="message">This site writes a secret message to the Ethereum
-            blockchain!</label>
-        <input id="userInput" type="text">
-
-        <button id="setMessageButton">Set secret message</button>
+        <h1>Deploy a Remix Contract</h1>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.js"></script>
-
     <script>
-
+        //var Web3 = require('web3');
         // Connect a the web3 provider
         if (typeof web3 !== 'undefined') {
-            console.log("Have provider");
             web3 = new Web3(web3.currentProvider);
         } else {
-            console.log("Use local host");
-            web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/07077c342a6849b6a856456ad601c8b3"));
+            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
         }
 
         // Set a default account
-        //web3.eth.defaultAccount = web3.eth.accounts[0];
-        var address = '0x31b98d14007bdee637298086988a0bbd31184523';
-        console.log(web3);
-        //web3.eth.getBalance(address, (err, bal) => {
-        //    let balance = bal 
-        //    let balanceEther = web3.utils.fromWei(balance.toString(), 'ether')
-        //    console.log('-----------');
-        //    console.log(balanceEther);
-        //});
-        web3.eth.getBalance(address).then(console.log);
-
+        web3.eth.defaultAccount = web3.eth.accounts[0];
 
         // Get the contract address
-        var RemixContract = new web3.eth.Contract(
+        var remixContract = new web3.eth.Contract(
             [
                 {
                     "constant": false,
@@ -82,17 +61,13 @@
                     "type": "function"
                 }
             ],
-            '0x9D687b06d704E748853BF881C26C6933F6C040d8');
+            '0x095B0fA656263927679Caf150Cd7D2EF177a9DCB'
+        );
 
         // Get the contract abi
-        //var myMessage = RemixContract.at();
+        //var myMessage = RemixContract.at('0x095B0fA656263927679Caf150Cd7D2EF177a9DCB');
 
-        console.log(RemixContract);
-
-        $("#setMessageButton").click(function () {
-            RemixContract.methods.setMessage($("#userInput").val()).send({from: '0x3bcCa404943c3d0A9A808Cd4Aaae0814C6fFb87f'}).then(console.log);
-            console.log($("#userInput").val())
-        });
+        console.log(remixContract);
 
     </script>
 </body>

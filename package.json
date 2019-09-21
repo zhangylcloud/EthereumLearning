@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ethereumjs-tx": "^2.1.1",
     "web3": "^1.2.1",
     "wscat": "^2.2.1"
   }
